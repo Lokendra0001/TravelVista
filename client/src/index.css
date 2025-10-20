@@ -17,62 +17,67 @@
 
   --color-success: var(--success);
   --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
 }
 
-/* Light Tour & Travel Theme */
 :root {
   /* Text */
-  --text-primary: #1F2937;
-  /* Dark slate for headings */
-  --text-secondary: #4B5563;
-  /* Medium gray for secondary text */
-  --text-normal: #111827;
-  /* Normal text */
+  --text-primary: #052E16;
+  /* Deep forest green */
+  --text-secondary: #365314;
+  /* Olive green */
+  --text-normal: #1A2E05;
 
   /* Primary colors */
-  --primary: #0288D1;
-  /* Sky blue - main buttons */
-  --primary-hover: #0277BD;
-  /* Darker sky blue - hover */
-
-  --secondary: #FFC107;
-  /* Sunny yellow - highlights */
-  --accent: #10B981;
-  /* Emerald green - accents */
+  --primary: #059669;
+  /* Emerald green */
+  --primary-hover: #047857;
+  --secondary: #10B981;
+  /* Mint green */
+  --accent: #65A30D;
+  /* Lime accent */
 
   /* Backgrounds */
-  --background: #FDFDFD;
-  /* Light neutral background */
+  --background: #F0FDF4;
+  /* Light mint */
+  --card-bg: #ECFDF5;
 
   /* Borders */
-  --border: #E5E7EB;
-  /* Light gray borders */
-  --light-border: #F3F4F6;
-  /* Very light borders */
+  --border: #A7F3D0;
+  /* Soft green */
+  --light-border: #D1FAE5;
 
   /* Status colors */
-  --success: #10B981;
-  /* Success messages */
-  --danger: #EF4444;
-  /* Error / danger */
+  --success: #059669;
+  --danger: #DC2626;
+  --warning: #D97706;
+  --info: #0EA5E9;
 }
 
-/* Optional Dark Theme */
+/* Dark Mode */
 .dark {
+  /* Text */
   --text-primary: #F3F4F6;
   --text-secondary: #9CA3AF;
   --text-normal: #FFFFFFDD;
 
+  /* Primary colors */
   --primary: #0288D1;
   --primary-hover: #0277BD;
   --secondary: #FFC107;
   --accent: #059669;
 
-  --background: #0b0b0b;
+  /* Background */
+  --background: #0B0B0B;
 
+  /* Borders */
   --border: #27272A;
   --light-border: #3F3F46;
 
+  /* Status colors */
   --success: #34D399;
   --danger: #F87171;
+  --warning: #FBBF24;
+  --info: #3B82F6;
 }

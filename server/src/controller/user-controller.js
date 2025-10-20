@@ -11,42 +11,44 @@ const handleUserSignUp = async (req, res) => {
         }
 
         const createdUser = await User.create({ fullName, email, password });
+        const { password: _, ...userWithoutPwd } = createdUser.toObject();
         handleGetAndSendCookie(createdUser, res);
 
-        return res.status(201).json({ msg: "User Signup Successfully!", createdUser });
+        return res.status(201).json({ msg: "User Signup Successfully!", user: userWithoutPwd });
 
     } catch (err) {
         console.log(err)
         return res.status(500).json({ msg: err.msg })
     }
 }
-
 const handleUserSignIn = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const isUser = await User.findOne({ email });
+    const { email, password, role } = req.body;
+    const user = await User.findOne({ email });
 
-        if (!isUser) return res.status(400).json({ msg: "User Not Found!" });
+    if (!user) return res.status(400).json({ msg: "User not found!" });
 
-        const verifiedPwd = await isUser.verifyPwd(password);
-        console.log(verifiedPwd)
+    const verified = await user.verifyPwd(password);
+    if (!verified) return res.status(400).json({ msg: "Wrong password!" });
 
-        if (!verifiedPwd) return res.status(400).json({ msg: "Wrong Password. Try Another One!" });
-
-        handleGetAndSendCookie(isUser, res);
-        return res.status(200).json({ msg: "User Login Successfully!" });
-
-    } catch (err) {
-        return res.status(500).json({ msg: err.msg })
+    // 🔒 Enforce role correctly
+    if (role && user.role !== role) {
+        return res.status(403).json({
+            msg: `You are not authorized to log in as ${user.role}.`,
+        });
     }
-}
+
+    handleGetAndSendCookie(user, res);
+    return res.status(200).json({ msg: `Signin successful as ${role}!`, user });
+};
+
+
 
 const handleGetCurrentUser = async (req, res) => {
     try {
         const { email } = req.user;
 
-        const user = await User.findOne({ email });
-        return res.status(200).json({ msg: `Welcome Back ${user.fullName}` });
+        const user = await User.findOne({ email }).select('-password ');
+        return res.status(200).json({ msg: `Welcome Back ${user.fullName}`, user });
 
     } catch (err) {
         return res.status(500).json({ msg: err.msg })

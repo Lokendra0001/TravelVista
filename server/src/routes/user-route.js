@@ -5,14 +5,11 @@ const checkAuthentication = require("../middleware/auth");
 const { handleUserSignUp, handleUserSignIn, handleGetCurrentUser } = require("../controller/user-controller");
 
 
-router.post('/', handleUserSignUp)
+router.post('/signup', handleUserSignUp)
 
-router.get('/', handleUserSignIn);
+router.post('/signin', handleUserSignIn);
 
 router.get("/me", checkAuthentication, handleGetCurrentUser)
-
-
-
 
 
 module.exports = router;

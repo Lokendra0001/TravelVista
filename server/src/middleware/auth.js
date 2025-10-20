@@ -3,7 +3,9 @@ const { handleCheckTokenAndVerifyUser } = require("../libs/auth");
 const handleCheckAuthentication = (req, res, next) => {
     try {
         req.user = null;
-        const token = req.cookies.tv_authToken;
+        const token = req.cookies?.tv_authToken;
+        if (!token) return res.status(404).json({ msg: "Please Login First!" });
+
         const user = handleCheckTokenAndVerifyUser(token);
 
         if (!user) return res.status(400).json({ msg: "Please Login First!" });
