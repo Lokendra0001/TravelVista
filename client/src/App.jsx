@@ -1,7 +1,7 @@
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchCurrentUser } from "./redux/slices/authSlice/authSlice.thunk";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -9,28 +9,41 @@ import HomePage from "./pages/HomePage";
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { Toaster } from "react-hot-toast";
 import LoginProtectedRoute from "./components/LoginProtectedRoute";
 import Loader from "./components/Loader";
-import DestinationPage from "./pages/DestinationPage.JSX";
+import DestinationPage from "./pages/admin/DestinationPage.jsx";
+import { Toaster } from "react-hot-toast";
+import AdminDashboard from "./pages/admin/Dashboard.jsx";
+import CreateTour from "./pages/admin/CreateTour.jsx";
+import AllTours from "./pages/admin/AllTours.jsx";
+import TourDetail from "./components/TourDetail.jsx";
 
 function App() {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(true); // local state loader
 
   useEffect(() => {
-    dispatch(fetchCurrentUser());
-    // console.log("HELLO");
+    const loadUser = async () => {
+      try {
+        await dispatch(fetchCurrentUser()).unwrap();
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false); // hide loader after fetch completes
+      }
+    };
+
+    loadUser();
   }, []);
 
-  // if (loading) return <Loader />;
+  if (loading) return <Loader />; // show loader only during first fetch
 
   // Define routes
   const router = createBrowserRouter([
     {
       path: "/",
       element: (
-        <ProtectedRoute>
+        <ProtectedRoute requiredRole="user">
           <UserLayout />
         </ProtectedRoute>
       ),
@@ -44,15 +57,17 @@ function App() {
         </ProtectedRoute>
       ),
       children: [
-        { path: "", element: <HomePage /> }, // Default admin page
-        { path: "destination", element: <HomePage /> }, // /admin/destination
+        { path: "", element: <AdminDashboard /> }, // Default admin page
+        { path: "create-tour", element: <CreateTour /> }, // /admin/destination
+        { path: "tours", element: <AllTours /> }, // /admin/destination
+        { path: "tours/:id", element: <TourDetail /> }, // /admin/destination
       ],
     },
     {
       path: "/signin",
       element: (
         <LoginProtectedRoute>
-          <Signin />{" "}
+          <Signin />
         </LoginProtectedRoute>
       ),
     },

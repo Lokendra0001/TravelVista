@@ -1,12 +1,14 @@
 import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Container from "../components/Container";
 
 function AdminLayout() {
   return (
     <div>
-      <header>Admin Header</header>
-      <main>
+      <Navbar />
+      <Container>
         <Outlet /> {/* Nested route renders here */}
-      </main>
+      </Container>
     </div>
   );
 }

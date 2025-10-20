@@ -5,5 +5,10 @@ export const SUB_API = {
         SIGNUP: "user/signup",
         SIGNIN: "user/signin",
         CURRENT_USER: "user/me"
+    },
+    TOUR: {
+        CREATE: "tour/",
+        GET_ALL_TOURS: "tour/",
+        GET_TOUR: "tour/",
     }
 }

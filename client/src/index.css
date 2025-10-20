@@ -23,30 +23,26 @@
 
 :root {
   /* Text */
-  --text-primary: #052E16;
-  /* Deep forest green */
-  --text-secondary: #365314;
-  /* Olive green */
-  --text-normal: #1A2E05;
+  --text-primary: #1E293B;
+  --text-secondary: #475569;
+  --text-normal: #0F172A;
 
   /* Primary colors */
-  --primary: #059669;
-  /* Emerald green */
-  --primary-hover: #047857;
-  --secondary: #10B981;
-  /* Mint green */
-  --accent: #65A30D;
-  /* Lime accent */
+  --primary: #F3B227;
+  /* Golden yellow */
+  --primary-hover: #D99B1A;
+  --secondary: #D96750;
+  /* Coral/orange */
+  --accent: #F59E0B;
+  /* Amber accent */
 
   /* Backgrounds */
-  --background: #F0FDF4;
-  /* Light mint */
-  --card-bg: #ECFDF5;
+  --background: #FFFFFF;
+  --card-bg: #FFFBEB;
 
   /* Borders */
-  --border: #A7F3D0;
-  /* Soft green */
-  --light-border: #D1FAE5;
+  --border: #FDE68A;
+  --light-border: #FEF3C7;
 
   /* Status colors */
   --success: #059669;
