@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(cors({
     credentials: true,
     methods: ["GET", "POST", "PATCH", "DELETE"],
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "https://travelvista-ten.vercel.app"],
 
 }))
 
