@@ -1,0 +1,9 @@
+# Remove the file from Git history but keep it locally
+git rm --cached server/.env
+
+# Add a .gitignore rule to prevent it from being committed again
+echo ".env" >> .gitignore
+git add .gitignore
+
+# Commit the removal
+git commit -m "Remove .env file containing secret"
