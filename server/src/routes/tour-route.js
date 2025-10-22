@@ -4,7 +4,7 @@ const Tour = require("../model/tour-model");
 const checkAuthentication = require("../middleware/auth");
 const router = Router();
 
-router.post("/", upload.array("images", 5), async (req, res) => {
+router.post("/", upload.array("images", 10), async (req, res) => {
     try {
         const {
             tourName,
@@ -38,7 +38,7 @@ router.post("/", upload.array("images", 5), async (req, res) => {
 
         const createdTour = await Tour.create({ tourName, destination, description, duration, pricePerPerson, category, hotelName, hotelType, hotelLocation, hotelRoomType, hotelMealPlan, transportMode, transportPickup, transportDrop, itinerary: JSON.parse(itinerary), startDate, endDate, availableSeats, rating, images: uploadedImages })
 
-        return res.status(201).json({ msg: "Tour Created Successfully!", createdTour })
+        return res.status(201).json({ msg: "Tour Created Successfully!", tourId: createdTour._id })
 
     } catch (err) {
         console.log(err)

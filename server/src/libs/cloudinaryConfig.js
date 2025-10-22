@@ -16,7 +16,7 @@ const storage = new CloudinaryStorage({
     cloudinary,
     params: {
         folder: "travelVista",
-        allowed_formats: ["jpg", "jpeg", "png"],
+        allowed_formats: ["jpg", "jpeg", "png", "webp"], // list all allowed types
     },
 });
 
