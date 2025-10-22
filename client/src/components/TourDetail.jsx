@@ -448,9 +448,11 @@ const TourDetail = () => {
                     Book Now
                   </Link>
                 ) : (
-                  <label className="inline-block w-full text-center bg-zinc-300 text-white cursor-not-allowed py-3 rounded-lg   text-lg font-bold  mb-4">
-                    Seat full or Expired
-                  </label>
+                  role === "user" && (
+                    <label className="inline-block w-full text-center bg-zinc-300 text-white cursor-not-allowed py-3 rounded-lg   text-lg font-bold  mb-4">
+                      Seat full or Expired
+                    </label>
+                  )
                 )}
 
                 <div className="text-center">

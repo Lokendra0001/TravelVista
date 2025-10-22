@@ -6,7 +6,15 @@ export const updateUserDetail = createAsyncThunk(
     "auth/updateUserDetail",
     async (data, { rejectWithValue }) => {
         try {
-            const res = await axios.post(`${SERVER_API}${SUB_API.AUTH.UPDATE_USER_DETAIL}`, data, { withCredentials: true });
+            const res = await axios.post(
+                `${SERVER_API}${SUB_API.AUTH.UPDATE_USER_DETAIL}`,
+                data, // FormData
+                {
+                    withCredentials: true,
+                    headers: { "Content-Type": "multipart/form-data" }, // 👈 important
+                }
+            );
+
             return res?.data; // must contain user object
         } catch (err) {
             return rejectWithValue(err?.response?.data?.msg || err.message);

@@ -15,13 +15,14 @@ import {
   ArrowLeft,
   IndianRupee,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input, Button, Select } from "../../components/common/";
 import { SERVER_API, SUB_API } from "../../utils/serverApiConfig";
 
 const CreateTour = () => {
   const [previewImages, setPreviewImages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -134,9 +135,9 @@ const CreateTour = () => {
         }
       );
 
-      console.log(res.data);
       reset();
       setPreviewImages([]);
+      navigate(`/admin/tours/${res?.data?.tourId}`);
     } catch (err) {
       console.log(err);
     } finally {
@@ -519,7 +520,7 @@ const CreateTour = () => {
 
               {watch("images").length <= 0 && (
                 <p className="text-red-500 text-sm mt-1">
-                  At least one image required!
+                  At least one image required! (1 - 10)
                 </p>
               )}
             </div>
