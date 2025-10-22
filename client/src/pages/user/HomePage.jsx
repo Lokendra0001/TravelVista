@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "../../components/common";
+import { Button } from "../../components/common/Index";
 import { Star } from "lucide-react";
 import axios from "axios";
 import { SERVER_API, SUB_API } from "../../utils/serverApiConfig";
-import TourCard from "../../components/TourCard";
+import { TourCard } from "../../components/Index";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [tours, setTours] = useState([]);
@@ -71,8 +72,9 @@ const HomePage = () => {
               country.
             </p>
 
-            <Button
-              className="bg-primary hover:bg-primary-hover cursor-pointer text-white py-2.5 px-4 rounded-lg font-semibold text-sm lg:text-lg shadow-lg group animate-fade-in-up "
+            <Link
+            to={"/tours"}
+              className="bg-primary flex w-fit items-center hover:bg-primary-hover cursor-pointer text-white py-2.5 px-4 rounded-lg font-semibold text-sm lg:text-lg shadow-lg group animate-fade-in-up "
               style={{ animationDelay: "0.6s" }}
             >
               Find Out More
@@ -87,7 +89,7 @@ const HomePage = () => {
                   clipRule="evenodd"
                 />
               </svg>
-            </Button>
+            </Link>
           </div>
 
           {/* Right Content - Image */}

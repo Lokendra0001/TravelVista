@@ -15,6 +15,7 @@ import {
   Linkedin,
   Mail,
   MessageCircle,
+  Info,
 } from "lucide-react";
 
 const Footer = () => {
@@ -38,10 +39,9 @@ const Footer = () => {
 
   const userLinks = [
     { path: "/", label: "Home", icon: <Home size={16} /> },
-
+    { path: "/about", label: "About", icon: <Info size={16} /> },
     { path: "/tours", label: "Tours", icon: <Plane size={16} /> },
-    { path: "/bookings", label: "Bookings", icon: <Calendar size={16} /> },
-    { path: "/my-bookings", label: "My Trips", icon: <BookOpen size={16} /> },
+    { path: "/my-bookings", label: "Bookings", icon: <Calendar size={16} /> },
   ];
 
   const navLinks = role === "admin" ? adminLinks : userLinks;
@@ -77,6 +77,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <NavLink
                     to={link.path}
+                    end
                     className={({ isActive }) =>
                       `flex items-center space-x-2 text-gray-300 hover:text-primary transition-colors duration-300 text-sm ${
                         isActive ? "text-primary font-medium" : ""

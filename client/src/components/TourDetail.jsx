@@ -308,12 +308,12 @@ const TourDetail = () => {
     }
   };
 
-  const calculateDate = (tourCreatedDate, availableSeats) => {
+  const calculateDate = (tourStartDate, availableSeats) => {
     const today = new Date(); // current date and time
-    const createdDate = new Date(tourCreatedDate);
+    const startDate = new Date(tourStartDate);
 
     // Check if startDate is in the future and seats are available
-    if (createdDate < today && availableSeats > 0) {
+    if (startDate > today && availableSeats > 0) {
       return true;
     }
     return false;
@@ -321,7 +321,7 @@ const TourDetail = () => {
 
   return (
     <div className="min-h-screen bg-background py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className=" px-2">
         {/* Header Section */}
         <div className="mb-8">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">

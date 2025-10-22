@@ -2,28 +2,23 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
-  Menu,
   X,
   User,
   LogOut,
   ChevronDown,
   Home,
-  MapPin,
   Plane,
   BookOpen,
-  Calendar,
-  Users,
   MapPinned,
   Info,
 } from "lucide-react";
 import { RiMenu3Fill } from "react-icons/ri";
 
 import useUser from "../custom-hooks/useUser";
-import LogoutBtn from "./LogoutBtn";
+import { LogoutBtn } from "./common/Index";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const location = useLocation();

@@ -1,8 +1,7 @@
-// src/pages/admin/AllTours.jsx
 import React, { useEffect, useState } from "react";
-import { Plus, Filter, Search, Download } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
-import TourCard from "../../components/TourCard";
+import { TourCard } from "../../components/Index";
 import axios from "axios";
 import { SERVER_API, SUB_API } from "../../utils/serverApiConfig";
 
@@ -54,7 +53,7 @@ const AllTours = () => {
   return (
     <div className="relative min-h-screen ">
       {/* Background Image */}
-      <div className="sticky top-16 h-80 w-full overflow-hidden">
+      <div className="sticky top-16 h-120 w-full overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
           alt="Tour Management Banner"
@@ -63,9 +62,7 @@ const AllTours = () => {
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
           <div className="text-center text-white">
             <h1 className="text-5xl font-bold mb-4">Tour Management</h1>
-            <p className="text-xl">
-              View and organize all your tour packages
-            </p>
+            <p className="text-xl">View and organize all your tour packages</p>
           </div>
         </div>
       </div>

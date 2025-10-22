@@ -16,7 +16,7 @@ import {
   IndianRupee,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { Input, Button, Select } from "../../components/common/";
+import { Input, Button, Select } from "../../components/common/Index";
 import { SERVER_API, SUB_API } from "../../utils/serverApiConfig";
 
 const CreateTour = () => {

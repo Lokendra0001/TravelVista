@@ -1,154 +1,27 @@
 import React, { useEffect, useState } from "react";
-import {
-  Search,
-  Filter,
-  MapPin,
-  Calendar,
-  Users,
-  Star,
-  Heart,
-  Clock,
-} from "lucide-react";
+import { Search } from "lucide-react";
 import axios from "axios";
 import { SERVER_API, SUB_API } from "../../utils/serverApiConfig";
-import { Link } from "react-router-dom";
-import TourCard from "../../components/TourCard";
+import { TourCard } from "../../components/Index";
 
-const AllToursPage = () => {
+const AllToursUser = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [priceRange, setPriceRange] = useState([0, 50000]);
   const [sortBy, setSortBy] = useState("popular");
-
-  //   const tours = [
-  //     {
-  //       id: 1,
-  //       name: "Golden Triangle Tour",
-  //       image:
-  //         "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1000&q=80",
-  //       destination: "Delhi, Agra, Jaipur",
-  //       duration: "6 Days",
-  //       price: 24999,
-  //       originalPrice: 29999,
-  //       rating: 4.8,
-  //       reviews: 1247,
-  //       category: "heritage",
-  //       featured: true,
-  //       description: "Explore India's most iconic heritage circuit",
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "Kerala Backwaters Houseboat",
-  //       image:
-  //         "https://images.unsplash.com/photo-1580619305218-8423a7ef79b4?auto=format&fit=crop&w=1000&q=80",
-  //       destination: "Alleppey, Kumarakom",
-  //       duration: "4 Days",
-  //       price: 18999,
-  //       originalPrice: 22999,
-  //       rating: 4.9,
-  //       reviews: 892,
-  //       category: "nature",
-  //       featured: true,
-  //       description: "Serene backwaters and authentic Kerala experience",
-  //     },
-  //     {
-  //       id: 3,
-  //       name: "Goa Beach Paradise",
-  //       image:
-  //         "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1000&q=80",
-  //       destination: "North Goa, South Goa",
-  //       duration: "5 Days",
-  //       price: 12499,
-  //       originalPrice: 15999,
-  //       rating: 4.7,
-  //       reviews: 1563,
-  //       category: "beach",
-  //       featured: false,
-  //       description: "Sun, sand, and Portuguese heritage",
-  //     },
-  //     {
-  //       id: 4,
-  //       name: "Himalayan Adventure Trek",
-  //       image:
-  //         "https://images.unsplash.com/photo-1464822759843-44bcb45994c8?auto=format&fit=crop&w=1000&q=80",
-  //       destination: "Manali, Leh-Ladakh",
-  //       duration: "8 Days",
-  //       price: 32499,
-  //       originalPrice: 37999,
-  //       rating: 4.6,
-  //       reviews: 567,
-  //       category: "adventure",
-  //       featured: true,
-  //       description: "High-altitude trekking and mountain views",
-  //     },
-  //     {
-  //       id: 5,
-  //       name: "Rajasthan Royal Experience",
-  //       image:
-  //         "https://images.unsplash.com/photo-1534577403868-27b805ad4a68?auto=format&fit=crop&w=1000&q=80",
-  //       destination: "Udaipur, Jodhpur, Jaisalmer",
-  //       duration: "7 Days",
-  //       price: 28999,
-  //       originalPrice: 33999,
-  //       rating: 4.8,
-  //       reviews: 734,
-  //       category: "heritage",
-  //       featured: false,
-  //       description: "Live like royalty in desert palaces",
-  //     },
-  //     {
-  //       id: 6,
-  //       name: "Andaman Island Escape",
-  //       image:
-  //         "https://images.unsplash.com/photo-1558349692-39c85a97f2ab?auto=format&fit=crop&w=1000&q=80",
-  //       destination: "Port Blair, Havelock Island",
-  //       duration: "6 Days",
-  //       price: 27499,
-  //       originalPrice: 31999,
-  //       rating: 4.7,
-  //       reviews: 423,
-  //       category: "beach",
-  //       featured: false,
-  //       description: "Pristine beaches and marine life",
-  //     },
-  //     {
-  //       id: 7,
-  //       name: "Varanasi Spiritual Journey",
-  //       image:
-  //         "https://images.unsplash.com/photo-1598439210625-506f36ec6d1d?auto=format&fit=crop&w=1000&q=80",
-  //       destination: "Varanasi, Sarnath",
-  //       duration: "3 Days",
-  //       price: 8999,
-  //       originalPrice: 11999,
-  //       rating: 4.5,
-  //       reviews: 678,
-  //       category: "spiritual",
-  //       featured: false,
-  //       description: "Ancient rituals and spiritual awakening",
-  //     },
-  //     {
-  //       id: 8,
-  //       name: "Wildlife Safari Adventure",
-  //       image:
-  //         "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1000&q=80",
-  //       destination: "Ranthambore, Bandhavgarh",
-  //       duration: "5 Days",
-  //       price: 21999,
-  //       originalPrice: 25999,
-  //       rating: 4.6,
-  //       reviews: 345,
-  //       category: "adventure",
-  //       featured: true,
-  //       description: "Tiger spotting and jungle safaris",
-  //     },
-  //   ];
-
   const [tours, setTours] = useState([]);
   const [filteredTours, setFilteredTours] = useState([]);
 
   const categories = [
     { value: "all", label: "All Tours", count: tours.length },
-    ...["heritage", "nature", "beach", "adventure", "spiritual", "pilgrimage"].map((cat) => ({
+    ...[
+      "heritage",
+      "nature",
+      "beach",
+      "adventure",
+      "spiritual",
+      "pilgrimage",
+    ].map((cat) => ({
       value: cat,
       label: cat.charAt(0).toUpperCase() + cat.slice(1),
       count: tours.filter((t) => t.category === cat).length,
@@ -325,7 +198,7 @@ const AllToursPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {filteredTours.map((tour, idx) => (
-              <TourCard key={idx} tour={tour}/>
+              <TourCard key={idx} tour={tour} />
             ))}
           </div>
 
@@ -346,4 +219,4 @@ const AllToursPage = () => {
   );
 };
 
-export default AllToursPage;
+export default AllToursUser;

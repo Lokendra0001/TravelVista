@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SERVER_API, SUB_API } from "../../utils/serverApiConfig";
-import { Button } from "../../components/common/";
-
+import { Button } from "../../components/common/Index";
+import { downloadInvoice } from "../../utils/downloadInvoice";
+import useUser from "../../custom-hooks/useUser";
 import {
   AiOutlineLoading3Quarters,
   AiOutlineExclamationCircle,
 } from "react-icons/ai";
-import { downloadInvoice } from "../../utils/downloadInvoice";
-import useUser from "../../custom-hooks/useUser";
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);

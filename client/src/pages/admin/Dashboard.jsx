@@ -10,16 +10,25 @@ import {
   MapPin,
   Settings,
   TrendingUp,
-  Calendar,
-  Star,
-  ChevronRight,
-  Eye,
-  Edit3,
-  ArrowRight,
   Sparkles,
   Globe,
   Heart,
+  User,
+  IndianRupee,
 } from "lucide-react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  Legend,
+} from "recharts";
+import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   const { user, role, loading } = useUser();
@@ -71,9 +80,9 @@ const AdminDashboard = () => {
       color: "secondary",
     },
     {
-      icon: DollarSign,
+      icon: IndianRupee,
       label: "Revenue",
-      value: "$45.2K",
+      value: "45.2K",
       change: "+15.7%",
       color: "success",
     },
@@ -85,42 +94,63 @@ const AdminDashboard = () => {
       title: "Create Tour",
       description: "Add new destinations",
       color: "primary",
+      to: "/admin/create-tour",
     },
     {
       icon: BookOpen,
       title: "Bookings",
       description: "Manage reservations",
       color: "secondary",
-    },
-    {
-      icon: Users,
-      title: "Users",
-      description: "Customer management",
-      color: "accent",
+      to: "/admin/bookings",
     },
     {
       icon: MapPin,
       title: "Destinations",
       description: "Explore locations",
       color: "info",
+      to: "/admin/tours",
+    },
+    {
+      icon: User,
+      title: "Profile",
+      description: "Profile & Setting",
+      color: "accent",
+      to: "/admin/profile",
     },
   ];
 
+  // Dummy data for charts
+  const revenueData = [
+    { month: "Jan", revenue: 12000 },
+    { month: "Feb", revenue: 18000 },
+    { month: "Mar", revenue: 24000 },
+    { month: "Apr", revenue: 22000 },
+    { month: "May", revenue: 28000 },
+    { month: "Jun", revenue: 35000 },
+  ];
+
+  const bookingData = [
+    { category: "Heritage", bookings: 120 },
+    { category: "Nature", bookings: 80 },
+    { category: "Beach", bookings: 95 },
+    { category: "Adventure", bookings: 130 },
+  ];
+
   return (
-    <div className="h-auto bg-background">
-      {/* Hero Section with Full Background Image */}
+    <div className="h-auto bg-background pb-20">
+      {/* Hero Section */}
       <div className="relative h-96 overflow-hidden rounded-b-3xl">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage:
-              'url("https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2021&q=80")',
+              'url("https://images.unsplash.com/photo-1565688534245-05d6b5be184a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60"></div>
         </div>
 
-        {/* Floating Welcome Card */}
+        {/* Welcome Card */}
         <div className="relative z-10 max-w-4xl mx-auto pt-20 px-6">
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl">
             <div className="flex items-center gap-4 mb-4">
@@ -129,7 +159,7 @@ const AdminDashboard = () => {
               </div>
               <div>
                 <h1 className="text-4xl font-bold text-white mb-2">
-                  Welcome, {user?.name}!
+                  Welcome, {user?.fullName?.split(" ")?.[0]}!
                 </h1>
                 <p className="text-white/80 text-lg">
                   Ready to create amazing travel experiences today?
@@ -157,7 +187,7 @@ const AdminDashboard = () => {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 -mt-16 relative z-20">
-        {/* Stats Grid */}
+        {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {stats.map((stat, index) => (
             <div
@@ -189,22 +219,58 @@ const AdminDashboard = () => {
           ))}
         </div>
 
-        {/* Quick Actions Section */}
-        <div className="bg-gradient-to-br from-card-bg to-white rounded-3xl shadow-lg border border-light-border p-8 mb-8">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-3xl font-bold text-text-primary mb-2">
-                Quick Actions
-              </h2>
-              <p className="text-text-secondary text-lg">
-                Manage your travel business efficiently
-              </p>
-            </div>
+        {/* Charts Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          {/* Revenue Chart */}
+          <div className="bg-white rounded-3xl shadow-lg p-6 border border-light-border">
+            <h2 className="text-xl font-bold mb-4 text-text-primary">
+              Monthly Revenue
+            </h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={revenueData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip />
+                <Line
+                  type="monotone"
+                  dataKey="revenue"
+                  stroke="#3b82f6"
+                  strokeWidth={3}
+                  dot={{ r: 4 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
+
+          {/* Bookings Chart */}
+          <div className="bg-white rounded-3xl shadow-lg p-6 border border-light-border">
+            <h2 className="text-xl font-bold mb-4 text-text-primary">
+              Bookings by Category
+            </h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={bookingData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="category" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="bookings" fill="#10b981" barSize={40} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="bg-gradient-to-br from-card-bg to-white rounded-3xl shadow-lg border border-light-border p-8">
+          <h2 className="text-3xl font-bold text-text-primary mb-8">
+            Quick Actions
+          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {quickActions.map((action, index) => (
-              <button
+              <Link
+                to={action.to}
                 key={index}
                 className="group bg-white rounded-xl border-2 border-light-border hover:border-primary hover:shadow-xl transition-all duration-300 p-6 text-left"
               >
@@ -221,7 +287,7 @@ const AdminDashboard = () => {
                     {action.description}
                   </p>
                 </div>
-              </button>
+              </Link>
             ))}
           </div>
         </div>

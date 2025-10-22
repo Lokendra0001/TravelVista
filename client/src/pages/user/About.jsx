@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Globe,
   Shield,
@@ -46,38 +45,36 @@ const About = () => {
         "Our team lives and breathes travel, bringing you authentic experiences with genuine care.",
     },
   ];
-const team = [
-  {
-    name: "Priya Sharma",
-    role: "Founder & CEO",
-    image:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    description: "Passionate about showcasing Indian heritage to the world",
-  },
-  {
-    name: "Rajesh Kumar",
-    role: "Head of Operations",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    description: "Expert in Indian travel logistics and cultural experiences",
-  },
-  {
-    name: "Anjali Patel",
-    role: "Travel Curator",
-    image:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    description: "Specializes in authentic Indian cultural experiences",
-  },
-  {
-    name: "Arun Singh",
-    role: "Customer Success",
-    image:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    description: "Ensuring memorable Indian travel experiences",
-  },
-];
-
-
+  const team = [
+    {
+      name: "Priya Sharma",
+      role: "Founder & CEO",
+      image:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      description: "Passionate about showcasing Indian heritage to the world",
+    },
+    {
+      name: "Rajesh Kumar",
+      role: "Head of Operations",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      description: "Expert in Indian travel logistics and cultural experiences",
+    },
+    {
+      name: "Anjali Patel",
+      role: "Travel Curator",
+      image:
+        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      description: "Specializes in authentic Indian cultural experiences",
+    },
+    {
+      name: "Arun Singh",
+      role: "Customer Success",
+      image:
+        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      description: "Ensuring memorable Indian travel experiences",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background my-10 ">

@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import {
   Users,
@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 
 // Assuming you have these reusable components
-import { Input, Select, Button } from "../../components/common/";
+import { Input, Select, Button } from "../../components/common/Index";
 import { SERVER_API, SUB_API } from "../../utils/serverApiConfig";
 
 const TourBooking = () => {
@@ -25,7 +25,6 @@ const TourBooking = () => {
   const {
     register,
     handleSubmit,
-    control,
     watch,
     formState: { errors },
   } = useForm({

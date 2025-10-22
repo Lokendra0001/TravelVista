@@ -10,8 +10,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { useForm } from "react-hook-form";
-import Input from "../components/common/Input";
-import Button from "../components/common/Button";
+import { Input, Button } from "../components/common/Index";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../redux/slices/authSlice/authSlice.thunk";

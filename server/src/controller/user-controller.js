@@ -55,6 +55,30 @@ const handleGetCurrentUser = async (req, res) => {
     }
 };
 
+const handleUpdateUser = async (req, res) => {
+    try {
+        const { _id } = req.user;
+        const { fullName, email } = req.body;
+        console.log(req.file)
+        const updatedUser = await User.findByIdAndUpdate(_id, { fullName, email, profilePic: req?.file?.path }, { new: true }).select('-password');
+        return res.status(200).json({ msg: "User Updated Successfully!", user: updatedUser });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ msg: `Internal Server Error : ${err.message}` })
+    }
+}
+
+const handleLogoutUser = async (req, res) => {
+    try {
+        res.clearCookie("tv_authToken");
+        return res.status(200).json({ msg: "User LogOut Successfully!" });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ msg: `Internal Server Error : ${err.message}` })
+    }
+}
+
 module.exports = {
-    handleGetCurrentUser, handleUserSignIn, handleUserSignUp
+    handleGetCurrentUser, handleUserSignIn, handleUserSignUp,
+    handleUpdateUser, handleLogoutUser
 }

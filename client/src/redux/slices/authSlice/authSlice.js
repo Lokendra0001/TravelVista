@@ -1,40 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { SERVER_API, SUB_API } from "../../../utils/serverApiConfig";
-
-export const updateUserDetail = createAsyncThunk(
-    "auth/updateUserDetail",
-    async (data, { rejectWithValue }) => {
-        try {
-            const res = await axios.post(
-                `${SERVER_API}${SUB_API.AUTH.UPDATE_USER_DETAIL}`,
-                data, // FormData
-                {
-                    withCredentials: true,
-                    headers: { "Content-Type": "multipart/form-data" }, // 👈 important
-                }
-            );
-
-            return res?.data; // must contain user object
-        } catch (err) {
-            return rejectWithValue(err?.response?.data?.msg || err.message);
-        }
-    }
-);
-
-
-export const logoutUser = createAsyncThunk(
-    "auth/logoutUser",
-    async (_, { rejectWithValue }) => {
-        try {
-            const res = await axios.get(`${SERVER_API}${SUB_API.AUTH.LOGOUT_USER}`, { withCredentials: true });
-            return res?.data; // must contain user object
-        } catch (err) {
-            return rejectWithValue(err?.response?.data?.msg || err.message);
-        }
-    }
-);
-
+import { createSlice } from "@reduxjs/toolkit";
+import { logoutUser } from "./authSlice.thunk"
 
 
 const authSlice = createSlice({
@@ -68,7 +33,7 @@ const authSlice = createSlice({
         builder.addMatcher(
             (action) => action.type.endsWith("/fulfilled"),
             (state, action) => {
-                if (action.type === "auth/logoutUser/fulfilled") return; // 👈 skip logout
+                if (action.type === "auth/logoutUser/fulfilled") return; // 👈 skip logout due to show the sigin if this not then user be like {} means no empty that's why we want user = null
                 state.user = { ...state.user, ...action.payload.user };
                 state.role = action.payload.user?.role;
                 state.loading = false;

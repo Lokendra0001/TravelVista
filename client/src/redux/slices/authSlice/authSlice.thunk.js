@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { SERVER_API, SUB_API } from "../../../utils/serverApiConfig";
-import { handleErrorMsg, handleSuccessMsg } from "../../../utils/toast";
 
 
 // SIGNUP
@@ -39,6 +38,38 @@ export const fetchCurrentUser = createAsyncThunk(
         try {
             const res = await axios.get(`${SERVER_API}${SUB_API.AUTH.CURRENT_USER}`, { withCredentials: true });
             return res?.data;
+        } catch (err) {
+            return rejectWithValue(err?.response?.data?.msg || err.message);
+        }
+    }
+);
+
+export const updateUser = createAsyncThunk(
+    "auth/updateUserDetail",
+    async (data, { rejectWithValue }) => {
+        try {
+            const res = await axios.post(
+                `${SERVER_API}${SUB_API.AUTH.UPDATE_USER_DETAIL}`,
+                data, // FormData
+                {
+                    withCredentials: true,
+                    headers: { "Content-Type": "multipart/form-data" }, // 👈 important
+                }
+            );
+
+            return res?.data; // must contain user object
+        } catch (err) {
+            return rejectWithValue(err?.response?.data?.msg || err.message);
+        }
+    }
+);
+
+export const logoutUser = createAsyncThunk(
+    "auth/logoutUser",
+    async (_, { rejectWithValue }) => {
+        try {
+            const res = await axios.get(`${SERVER_API}${SUB_API.AUTH.LOGOUT_USER}`, { withCredentials: true });
+            return res?.data; // must contain user object
         } catch (err) {
             return rejectWithValue(err?.response?.data?.msg || err.message);
         }

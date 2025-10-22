@@ -1,9 +1,7 @@
-import React from "react";
-import { Button } from "./common";
 import { LogOut } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../redux/slices/authSlice/authSlice";
-import { handleErrorMsg, handleSuccessMsg } from "../utils/toast";
+import { logoutUser } from "../../redux/slices/authSlice/authSlice.thunk";
+import { handleErrorMsg, handleSuccessMsg } from "../../utils/toast";
 
 const LogoutBtn = ({ classname }) => {
   const dispatch = useDispatch();

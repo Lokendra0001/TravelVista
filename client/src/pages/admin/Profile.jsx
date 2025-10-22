@@ -10,12 +10,11 @@ import {
   Shield,
   Calendar,
 } from "lucide-react";
-import { Input, Button } from "../../components/common";
+import { Input, Button, LogoutBtn } from "../../components/common/Index.jsx";
 import useUser from "../../custom-hooks/useUser";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserDetail } from "../../redux/slices/authSlice/authSlice";
+import { updateUser } from "../../redux/slices/authSlice/authSlice.thunk.js";
 import { handleErrorMsg, handleSuccessMsg } from "../../utils/toast";
-import LogoutBtn from "../../components/LogoutBtn";
 
 const Profile = () => {
   const { user, role } = useUser();
@@ -68,7 +67,7 @@ const Profile = () => {
       formData.append("email", data.email);
       if (profileFile) formData.append("profilePic", profileFile);
 
-      const res = await dispatch(updateUserDetail(formData)).unwrap();
+      const res = await dispatch(updateUser(formData)).unwrap();
       setIsEditing(false);
       handleSuccessMsg(res?.msg);
     } catch (err) {
@@ -182,7 +181,11 @@ const Profile = () => {
                   </>
                 )}
 
-                <LogoutBtn classname={"bg-danger/80 text-white hover:bg-red-500 justify-center rounded-md"}/>
+                <LogoutBtn
+                  classname={
+                    "bg-danger/80 text-white hover:bg-red-500 justify-center rounded-md"
+                  }
+                />
               </div>
             </div>
           </div>
