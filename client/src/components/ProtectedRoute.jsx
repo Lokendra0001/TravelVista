@@ -4,7 +4,9 @@ import { Navigate } from "react-router-dom";
 import useUser from "../custom-hooks/useUser";
 
 const ProtectedRoute = ({ children, requiredRole }) => {
-  const { user, role } = useUser();
+  const { user, role, loading } = useUser();
+
+  // if (loading) return <Loader />;
 
   // Redirect to signin if not logged in
   if (!user) return <Navigate to="/signin" replace />;

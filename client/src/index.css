@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 /* Theme variables */
 @theme {
   --color-primary: var(--primary);
@@ -30,7 +31,7 @@
   /* Primary colors */
   --primary: #F3B227;
   /* Golden yellow */
-  --primary-hover: #D99B1A;
+  --primary-hover: #eba91c;
   --secondary: #D96750;
   /* Coral/orange */
   --accent: #F59E0B;
@@ -42,7 +43,7 @@
 
   /* Borders */
   --border: #FDE68A;
-  --light-border: #FEF3C7;
+  --light-border: #E5E7EB;
 
   /* Status colors */
   --success: #059669;
@@ -69,7 +70,7 @@
 
   /* Borders */
   --border: #27272A;
-  --light-border: #3F3F46;
+  --light-border: #E5E7EB;
 
   /* Status colors */
   --success: #34D399;

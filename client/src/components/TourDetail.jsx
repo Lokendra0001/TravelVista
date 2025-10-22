@@ -15,15 +15,17 @@ import {
   Heart,
   Share2,
 } from "lucide-react";
-import { useParams } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import axios from "axios";
 import { SERVER_API, SUB_API } from "../utils/serverApiConfig";
+import useUser from "../custom-hooks/useUser";
 
 const TourDetail = () => {
   const { id } = useParams();
   const [tour, setTour] = useState("");
   const [activeTab, setActiveTab] = useState("information");
   const [isFavorite, setIsFavorite] = useState(false);
+  const { role } = useUser();
 
   useEffect(() => {
     const fetchCurrentTour = async () => {
@@ -306,6 +308,17 @@ const TourDetail = () => {
     }
   };
 
+  const calculateDate = (tourCreatedDate, availableSeats) => {
+    const today = new Date(); // current date and time
+    const createdDate = new Date(tourCreatedDate);
+
+    // Check if startDate is in the future and seats are available
+    if (createdDate < today && availableSeats > 0) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className="min-h-screen bg-background py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -348,7 +361,7 @@ const TourDetail = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 w-full gap-8">
           {/* Left Content - Tabs */}
           <div className="lg:col-span-2 space-y-6">
             {/* Tabs Navigation */}
@@ -381,10 +394,10 @@ const TourDetail = () => {
           </div>
 
           {/* Right Sidebar - Booking Card */}
-          <div className="space-y-6 h-full">
+          <div className="space-y-6 h-full w-full">
             {/* Price Card */}
-            <div className="sticky top-20 space-y-6">
-              <div className="bg-white rounded-2xl shadow-lg p-6 border border-light-border  ">
+            <div className="sticky top-20 space-y-6 w-full">
+              <div className="bg-white rounded-2xl shadow-lg p-6 w-full border border-light-border  ">
                 <div className="text-center mb-6">
                   <div className="text-3xl font-bold text-text-primary flex items-center justify-center gap-2">
                     <IndianRupee className="w-6 h-6" />
@@ -425,9 +438,20 @@ const TourDetail = () => {
                   </div>
                 </div>
 
-                {/* <button className="w-full bg-primary text-white py-4 rounded-xl hover:bg-primary-hover transition-all duration-300 text-lg font-bold shadow-lg hover:shadow-xl hover:scale-105 mb-4">
-                Book Now
-              </button> */}
+                {role === "user" &&
+                calculateDate(tour?.startDate, tour?.availableSeats) ? (
+                  <Link
+                    to={"booking"}
+                    state={tour}
+                    className="inline-block w-full text-center bg-primary text-white py-3 rounded-lg hover:bg-primary-hover transition-all duration-300 text-lg font-bold shadow-lg hover:shadow-xl mb-4"
+                  >
+                    Book Now
+                  </Link>
+                ) : (
+                  <label className="inline-block w-full text-center bg-zinc-300 text-white cursor-not-allowed py-3 rounded-lg   text-lg font-bold  mb-4">
+                    Seat full or Expired
+                  </label>
+                )}
 
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-2 text-warning mb-2">

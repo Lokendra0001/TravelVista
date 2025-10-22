@@ -12,6 +12,7 @@ router.post("/", upload.array("images", 5), async (req, res) => {
             description,
             duration,
             pricePerPerson,
+            category,
 
             hotelName,
             hotelType,
@@ -35,7 +36,7 @@ router.post("/", upload.array("images", 5), async (req, res) => {
 
         const uploadedImages = req.files.map((file) => file.path);
 
-        const createdTour = await Tour.create({ tourName, destination, description, duration, pricePerPerson, hotelName, hotelType, hotelLocation, hotelRoomType, hotelMealPlan, transportMode, transportPickup, transportDrop, itinerary: JSON.parse(itinerary), startDate, endDate, availableSeats, rating, images: uploadedImages })
+        const createdTour = await Tour.create({ tourName, destination, description, duration, pricePerPerson, category, hotelName, hotelType, hotelLocation, hotelRoomType, hotelMealPlan, transportMode, transportPickup, transportDrop, itinerary: JSON.parse(itinerary), startDate, endDate, availableSeats, rating, images: uploadedImages })
 
         return res.status(201).json({ msg: "Tour Created Successfully!", createdTour })
 
@@ -44,18 +45,23 @@ router.post("/", upload.array("images", 5), async (req, res) => {
         return res.status(500).json({ msg: `Internal Server Error :${err.message}` })
     }
 })
-
 router.get("/", checkAuthentication, async (req, res) => {
     try {
+        const tours = await Tour.find({ availableSeats: { $gt: 0 } }).sort({ updatedAt: -1 });
 
-        const allTours = await Tour.find({});
-        return res.status(201).json({ msg: "Tour Fetched Successfully!", tours: allTours })
+        const nowMs = Date.now();
 
+        const allTours = tours.filter(tour => {
+            const tourMs = new Date(tour.startDate).getTime();
+            return tourMs > nowMs;
+        });
+
+        return res.status(200).json({ msg: "Tours Fetched Successfully!", tours: allTours });
     } catch (err) {
-        console.log(err)
-        return res.status(500).json({ msg: `Internal Server Error :${err.message}` })
+        console.error(err);
+        return res.status(500).json({ msg: `Internal Server Error: ${err.message}` });
     }
-})
+});
 
 router.get("/:id", checkAuthentication, async (req, res) => {
     try {

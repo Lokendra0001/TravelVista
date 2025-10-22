@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import Container from "../components/Container";
 
 function AdminLayout() {
@@ -9,6 +10,7 @@ function AdminLayout() {
       <Container>
         <Outlet /> {/* Nested route renders here */}
       </Container>
+      <Footer />
     </div>
   );
 }

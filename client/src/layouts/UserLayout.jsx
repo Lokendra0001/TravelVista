@@ -1,13 +1,16 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Container from "../components/Container";
+import Footer from "../components/Footer";
 
 function UserLayout() {
   return (
     <div>
       <Navbar />
-      <main>
+      <Container>
         <Outlet /> {/* Nested route renders here */}
-      </main>
+      </Container>
+      <Footer />
     </div>
   );
 }

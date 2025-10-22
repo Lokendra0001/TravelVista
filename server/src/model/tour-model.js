@@ -7,6 +7,11 @@ const tourSchema = new Schema(
         description: { type: String, required: true },
         duration: { type: String, required: true },          // e.g., "4 Days / 3 Nights"
         pricePerPerson: { type: Number, required: true },
+        category: {
+            type: String,
+            enum: ["heritage", "nature", "beach", "adventure", "spiritual", "pilgrimage"],
+            default: "adventure"
+        },
 
         // Hotel Info
         hotelName: { type: String, required: true },

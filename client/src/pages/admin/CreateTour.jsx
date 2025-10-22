@@ -38,6 +38,7 @@ const CreateTour = () => {
       highlights: "",
       duration: "",
       pricePerPerson: "",
+      category: "",
       hotel: {
         name: "",
         type: "",
@@ -95,6 +96,7 @@ const CreateTour = () => {
       formData.append("highlights", data.highlights);
       formData.append("duration", data.duration);
       formData.append("pricePerPerson", data.pricePerPerson);
+      formData.append("category", data.category);
 
       // Hotel Info
       formData.append("hotelName", data.hotel.name);
@@ -232,6 +234,21 @@ const CreateTour = () => {
                 })}
                 error={errors.pricePerPerson?.message}
               />
+              <Select
+                label="Category *"
+                options={[
+                  "heritage",
+                  "nature",
+                  "beach",
+                  "adventure",
+                  "spiritual",
+                  "pilgrimage",
+                ]}
+                {...register("category", {
+                  required: "Category  is required",
+                })}
+                error={errors.category?.message}
+              />
             </div>
           </div>
 
@@ -254,7 +271,6 @@ const CreateTour = () => {
               <Select
                 label="Hotel Type *"
                 options={[
-                  "Select hotel Type",
                   "3-Star",
                   "4-Star",
                   "5-Star",
@@ -278,7 +294,6 @@ const CreateTour = () => {
               <Select
                 label="Room Type *"
                 options={[
-                  "Select room type",
                   "Standard Room",
                   "Deluxe Room",
                   "Superior Room",
@@ -293,7 +308,6 @@ const CreateTour = () => {
               <Select
                 label="Meal Plan *"
                 options={[
-                  "Select meal plan",
                   "Breakfast Only",
                   "Half Board",
                   "Full Board",
@@ -317,14 +331,7 @@ const CreateTour = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Select
                 label="Transport Mode *"
-                options={[
-                  "Select transport mode",
-                  "Bus",
-                  "Flight",
-                  "Train",
-                  "Cruise",
-                  "Private Car",
-                ]}
+                options={["Bus", "Flight", "Train", "Cruise", "Private Car"]}
                 {...register("transport.mode", {
                   required: "Transport mode is required",
                 })}
