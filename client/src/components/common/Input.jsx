@@ -23,7 +23,7 @@ const Input = forwardRef(
 
           <input
             type={isPassword ? (!showPassword ? "password" : "text") : type}
-            className={`py-2.5 pl-2 pr-10 grow outline-none ${className}`}
+            className={`py-2.5 pl-2 pr-10 placeholder-zinc-400 grow outline-none ${className}`}
             {...props}
             autoComplete="off"
             ref={ref}

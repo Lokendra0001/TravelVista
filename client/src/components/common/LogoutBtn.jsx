@@ -20,7 +20,7 @@ const LogoutBtn = ({ classname }) => {
       className={`${classname} w-full py-2 cursor-pointer flex  items-center   gap-2 hover:bg-secondary-hover transition-all duration-300 `}
       onClick={handleLogout}
     >
-      <LogOut className="w-5 h-5" /> Logout
+      <LogOut size={17} /> Logout
     </button>
   );
 };

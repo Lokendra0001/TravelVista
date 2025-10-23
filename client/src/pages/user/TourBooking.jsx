@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import {
@@ -21,6 +21,7 @@ import { SERVER_API, SUB_API } from "../../utils/serverApiConfig";
 const TourBooking = () => {
   const location = useLocation();
   const tourDetails = location.state || {};
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -56,6 +57,7 @@ const TourBooking = () => {
 
   const onSubmit = async (data) => {
     try {
+      setLoading(true);
       console.log(tourDetails);
       const numberOfTravelers = Number(
         watch("noOfTravelers")?.split(" ")[0] || 1
@@ -78,6 +80,8 @@ const TourBooking = () => {
       window.location.href = res?.data?.url; // Redirect to Stripe Checkout
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -295,9 +299,16 @@ const TourBooking = () => {
 
                 <Button
                   onClick={handleSubmit(onSubmit)}
-                  className="w-full mt-6 bg-primary hover:bg-primary-hover py-3 text-white"
+                  className={`w-full mt-6 ${
+                    loading
+                      ? "bg-zinc-300 text-text-normal cursor-not-allowed animate-pulse"
+                      : "bg-primary hover:bg-primary-hover text-white cursor-pointer"
+                  } py-3  `}
+                  disabled={loading}
                 >
-                  Confirm Booking - ₹{totals.total.toLocaleString()}
+                  {loading
+                    ? "Confirming..."
+                    : `Confirm Booking - ₹${totals.total.toLocaleString()}`}
                 </Button>
               </div>
 

@@ -139,7 +139,7 @@ const AdminDashboard = () => {
   return (
     <div className="h-auto bg-background pb-20">
       {/* Hero Section */}
-      <div className="relative h-96 overflow-hidden rounded-b-3xl">
+      <div className="relative h-96 overflow-hidden grid place-items-center md:block rounded-b-3xl">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
@@ -151,23 +151,23 @@ const AdminDashboard = () => {
         </div>
 
         {/* Welcome Card */}
-        <div className="relative z-10 max-w-4xl mx-auto pt-20 px-6">
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl">
+        <div className="relative z-10 max-w-4xl mx-auto md:pt-20 px-2 md:px-6">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-2  py-4 md:p-8 border border-white/20 shadow-2xl">
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-2xl flex items-center justify-center">
-                <Sparkles className="text-white w-8 h-8" />
+              <div className="p-3  bg-gradient-to-r from-primary to-accent rounded-2xl flex items-center justify-center">
+                <Sparkles className="text-white w-5 h-5 md:w-8 md:h-8" />
               </div>
               <div>
-                <h1 className="text-4xl font-bold text-white mb-2">
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
                   Welcome, {user?.fullName?.split(" ")?.[0]}!
                 </h1>
-                <p className="text-white/80 text-lg">
+                <p className="text-white/80 text-base  md:text-lg">
                   Ready to create amazing travel experiences today?
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-6 text-white/80">
+            <div className="flex flex-col md:flex-row items-center gap-6 text-white/80 text-sm md:text-base">
               <div className="flex items-center gap-2">
                 <Globe className="w-5 h-5" />
                 <span>56 Active Tours</span>
@@ -186,7 +186,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 -mt-16 relative z-20">
+      <div className=" px-2 md:px-6 -mt-16 relative z-20">
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {stats.map((stat, index) => (

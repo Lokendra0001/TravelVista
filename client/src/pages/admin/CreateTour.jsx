@@ -196,7 +196,7 @@ const CreateTour = () => {
                 })}
                 error={errors.destination?.message}
               />
-              <div className="mb-4 w-full col-span-2">
+              <div className="md:mb-4 w-full md:col-span-2">
                 <label
                   htmlFor="highlights"
                   className="block text-sm font-medium text-text-primary mb-1"
@@ -207,7 +207,7 @@ const CreateTour = () => {
                   id="Description"
                   placeholder="Key Description of the tour (e.g., Amber Fort visit, local food tasting)..."
                   rows={4}
-                  className={`block w-full rounded-lg border p-2 resize-none focus:outline-none focus:ring-2 focus:ring-primary border-zinc-300`}
+                  className={`block w-full rounded-lg border p-2 resize-none focus:outline-none focus:ring-2 placeholder-zinc-400 focus:ring-primary border-zinc-300`}
                   {...register("description", {
                     required: "Description are required",
                   })}
@@ -415,7 +415,7 @@ const CreateTour = () => {
                         id={`itinerary-${index}-activities`}
                         placeholder="e.g., Visit City Palace, try local Rajasthani cuisine..."
                         rows={3}
-                        className={`block w-full rounded-lg border resize-none border-light-border p-2 focus:outline-none focus:ring-2 focus:ring-primary ${
+                        className={`block w-full rounded-lg border resize-none border-light-border p-2 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-primary ${
                           errors.itinerary?.[index]?.activities
                             ? "border-red-500"
                             : "border-light-border"
@@ -527,7 +527,13 @@ const CreateTour = () => {
           </div>
 
           <div className="flex justify-end space-x-4 pt-6">
-            <Button className={"text-red-400"} onClick={() => reset()}>
+            <Button
+              className={"text-red-400"}
+              onClick={() => {
+                reset();
+                setPreviewImages([]);
+              }}
+            >
               Cancel
             </Button>
             <Button

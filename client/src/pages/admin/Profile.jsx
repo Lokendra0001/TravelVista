@@ -87,9 +87,7 @@ const Profile = () => {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-text-primary mb-3">
-            Admin Profile
-          </h1>
+          <h1 className="text-4xl font-bold text-text-primary mb-3">{role === "user" ? "Your" : "Admin"} Profile</h1>
           <p className="text-text-secondary text-lg">
             Manage your account settings and preferences
           </p>

@@ -191,11 +191,12 @@ const Navbar = () => {
                 <NavLink
                   key={link.path}
                   to={link.path}
+                  end
                   className={({ isActive }) =>
                     `flex items-center gap-2 px-4 py-3 rounded-lg font-medium ${
                       isActive
                         ? "bg-primary text-background"
-                        : "text-text-primary hover:bg-card-bg"
+                        : "text-text-primary hover:bg-primary/10"
                     }`
                   }
                   onClick={() => setIsMenuOpen(false)}
@@ -206,24 +207,29 @@ const Navbar = () => {
               ))}
 
               <NavLink
-                to="/profile"
-                className="flex items-center gap-2 px-4 py-3 text-text-primary hover:bg-card-bg rounded-lg"
+                to={role === "user" ? "/profile" : "/admin/profile"}
+                className={({ isActive }) =>
+                  `flex items-center gap-2 px-4 py-3 rounded-lg font-medium ${
+                    isActive
+                      ? "bg-primary text-background"
+                      : "text-text-primary hover:bg-primary/10"
+                  }`
+                }
                 onClick={() => setIsMenuOpen(false)}
               >
                 <User size={17} />
                 <span>Profile</span>
               </NavLink>
 
-              <button
+              <LogoutBtn
                 onClick={() => {
                   handleLogout();
                   setIsMenuOpen(false);
                 }}
-                className="flex items-center gap-2 w-full px-4 py-3 text-danger hover:bg-danger/10 rounded-lg"
-              >
-                <LogOut size={17} />
-                <span>Logout</span>
-              </button>
+                classname={
+                  "pl-4 text-text-primary  hover:bg-danger/20 rounded-lg hover:text-danger"
+                }
+              />
             </>
           ) : (
             <>
