@@ -10,13 +10,18 @@ const handleGetAndSendCookie = (user, res) => {
     }
     const token = jwt.sign(userPayload, jwt_secret);
 
-    res.clearCookie("tv_authToken");
+    res.clearCookie("tv_authToken", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    });
     res.cookie("tv_authToken", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production", // true in prod, false in dev
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+
 
 }
 

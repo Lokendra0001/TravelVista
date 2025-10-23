@@ -68,7 +68,7 @@ Meals: ${tourDetails.hotelMealPlan}`,
                 customerPhone: phone,    // example field
                 specialRequests // example field
             },
-            success_url: `http://localhost:5173/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+            success_url: `${process.env.CLIENT_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${process.env.CLIENT_URL}/tours/${tourDetails._id}`,
         });
 
